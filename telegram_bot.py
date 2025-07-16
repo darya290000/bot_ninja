@@ -1,7 +1,7 @@
 import requests
 import os
 
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")  # مطمئن شو این مقدار تنظیم شده
 
 def send_message(chat_id, text):
     if not BOT_TOKEN:
