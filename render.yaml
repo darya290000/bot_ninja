@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: telegram-signal-bot
+    env: python
+    buildCommand: ""
+    startCommand: python app.py
+    plan: free
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
