@@ -10,31 +10,27 @@ def send_message(chat_id, text):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     data = {"chat_id": chat_id, "text": text}
     try:
-        response = requests.post(url, data=data)
-        print(f"[📤] Sent to {chat_id}: {text}")
-        print(f"[✅] Telegram response: {response.text}")
+        resp = requests.post(url, data=data)
+        print(f"[📤] Sent to {chat_id}: {text} -> {resp.text}")
     except Exception as e:
-        print(f"[❌] Telegram error: {e}")
+        print(f"[❌] Telegram send error: {e}")
 
 def handle_update(update):
-    message = update.get("message", {})
-    text = message.get("text", "")
-    chat_id = message.get("chat", {}).get("id", "")
+    msg = update.get("message", {})
+    text = msg.get("text", "").strip()
+    chat_id = msg.get("chat", {}).get("id")
 
-    print(f"[📥] Received message: {text} from chat_id: {chat_id}")
-
-    if not text or not chat_id:
-        return
+    print(f"[📥] Received: {text} from {chat_id}")
 
     if text == "/start":
-        send_message(chat_id, "👋 خوش آمدید به ربات سیگنال‌دهی مالی!")
+        send_message(chat_id, "👋 خوش آمدید!")
     elif text == "/subscribe":
-        send_message(chat_id, "✅ شما با موفقیت در دریافت سیگنال‌ها عضو شدید.")
-    elif text == "/help":
-        send_message(chat_id, "📘 راهنما:\n/start\n/subscribe\n/unsubscribe\n/status")
+        send_message(chat_id, "✅ شما مشترک سیگنال‌ها شدید.")
+    elif text == "/unsubscribe":
+        send_message(chat_id, "❌ عضویت لغو شد.")
     elif text == "/status":
         send_message(chat_id, "📡 شما در حال حاضر عضو هستید.")
-    elif text == "/unsubscribe":
-        send_message(chat_id, "❌ عضویت شما لغو شد.")
+    elif text == "/help":
+        send_message(chat_id, "/start\n/subscribe\n/unsubscribe\n/status")
     else:
-        send_message(chat_id, "🤖 دستور نامعتبر است. از /help استفاده کنید.")
+        send_message(chat_id, "🤖 دستور معتبر نیست. از /help استفاده کنید.")
