@@ -10,6 +10,7 @@ app = Flask(__name__)
 history_data = {}
 bot_running = False
 
+
 def signal_bot():
     """ربات سیگنال‌دهنده که در پس‌زمینه اجرا می‌شود"""
     global bot_running
