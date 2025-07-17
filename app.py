@@ -4,7 +4,7 @@ import time
 import os
 from config import SYMBOLS
 from scalper_signals import analyze_symbol
-from telegram_bot import send_alert
+from telegram_alert import send_alert
 
 app = Flask(__name__)
 history_data = {}
