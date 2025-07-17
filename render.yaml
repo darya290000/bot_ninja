@@ -1,3 +1,12 @@
-Flask==2.3.3
-requests==2.31.0
-gunicorn==21.2.0
+services:
+  - type: web
+    name: telegram-signal-bot
+    env: python
+    buildCommand: ""
+    startCommand: python app.py
+    plan: free
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: 8136421090:AAFrb8RI6BQ2tH49YXX_5S32_W0yWfT04Cg
+      - key: SESSION_SECRET
+        sync: false
